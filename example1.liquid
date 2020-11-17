@@ -5,6 +5,13 @@ E.g. – You save 25%
 
 {% if product.compare_at_price_max > product.price %}You save {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%{% endif %}
 
+{% if product.compare_at_price %}
+{% capture discount %}
+{{ product.compare_at_price | minus:product.price | times:100 | divided_by: product.compare_at_price }}%
+{% endcapture %}
+{{ discount }}
+{% endif %}
+
 
 {% comment %}
 That's Javascript tripping you ;-) Basically, on product pages you have variants and as you change your options, Javascript makes sure the prices etc. are updated accordingly in the HTML. Have a look at your Assets / theme.js.liquid for these lines
